@@ -1,9 +1,10 @@
 ############################# BUILD CONFIG ######################################
-
 TARGET = QtCharts
 
 QT = core gui widgets
 contains(QT_COORD_TYPE, float): DEFINES += QT_QREAL_IS_FLOAT
+
+MODULE_VERSION = 5.11.2
 
 QMAKE_DOCS = $$PWD/doc/qtcharts.qdocconf
 
@@ -78,17 +79,6 @@ HEADERS += $$THEMES
 OTHER_FILES += doc/qtcharts.qdocconf \
                doc/src/* \
                doc/images/*
-
-msvc {
-    # Suppress "conversion from 'size_t' to 'int', possible loss of data" warnings in 64bit
-    # builds resulting from usage of str::sort
-    QMAKE_CXXFLAGS_WARN_ON += -wd4267
-}
-
-win32:!winrt:!wince {
-    # ChartThemeSystem uses Windows native API
-    LIBS += -luser32
-}
 
 load(qt_module)
 CONFIG += silent
